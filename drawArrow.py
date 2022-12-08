@@ -1,4 +1,5 @@
-import cv2 
+import cv2
+
 
 class DrawArrow:
     def __init__(self, image, start_point, end_point, color, thickness):
@@ -10,7 +11,9 @@ class DrawArrow:
         
     def drawArrow(self):
         window_name = "Direction Arrow"
+        
         image = cv2.arrowedLine(self.image, self.start_point, self.end_point,
                                      self.color, self.thickness, tipLength = 0.5)
         
         cv2.imshow(window_name, image)
+        cv2.waitKey(50)

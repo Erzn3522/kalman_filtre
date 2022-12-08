@@ -8,14 +8,14 @@ from drawArrow import DrawArrow
 
 cap = cv2.VideoCapture(0)
 background = cv2.imread("img/background.png")
-
 frame_height, frame_width = background.shape[:2]
 # Load detector
 od = ColorDetector()
 
 # Load Kalman filter to predict the trajectory
 kf = KalmanFilter()
-
+directX = 0
+directY = 0
 
 # out = cv2.VideoWriter('video/out.avi',cv2.VideoWriter_fourcc('M','J','P','G'), 10, (frame_width,frame_height))
 while True:
@@ -36,29 +36,36 @@ while True:
     
     #region DIRECTION
     direction = DirectionAssign(cx,cy,predicted[0], predicted[1])
-    direction.assign()    
+    directions = direction.assign()    
     #endregion
     
     #region ARROW
-    start_point = (int(frame_height/2), int(frame_height/2))
-    end_point = (int(frame_width/2 +(direction.actualx)) , int(frame_height/2 + (direction.actualy)))
-    # end_point = (0, 50)
-    arrow = DrawArrow(background, start_point, end_point, (0,0,0), 3)
-    arrow.drawArrow()
+    # endPointX = int(frame_width/2 +(directions[0]))
+    # endPointY = int(frame_height/2 + (directions[1]))
+    
+    # start_point = (int(frame_height/2), int(frame_height/2))
+    # end_point = (endPointX , endPointY)
+    # )
+    # arrow = DrawArrow(background, start_point, end_point, (0,0,0), 3)
+    # arrow.drawArrow()
     #endregion
     
-    #region EKRANA RIGHT-LEFT BASMA
+    #region console'a left-right-up-down yazma
+    
     # if(predicted[0] != 0):
     #     print(direction.assign())
 
     #endregion
     
+    #region EKRANA PREDICTED VALUE BASMA
     cv2.rectangle(frame, (x, y), (x2, y2), (255, 0, 0), 4)
     cv2.circle(frame, (cx, cy), 20, (0, 0, 255), 4)
     cv2.circle(frame, (predicted[0], predicted[1]), 20, (255, 0, 0), 4)
     cv2.circle(frame, (predicted1[0], predicted1[1]), 20, (0, 255, 0), 4)
     cv2.imshow("Frame", frame)
-    # out.write(frame)
+    # out.write(frame)  
+    #endregion
+    
     #region CONSOLE POS BASMA
     # txtOnDisplay = "predicted pos: {} - {}"    
     # print(txtOnDisplay.format(cy, predicted[1]))
