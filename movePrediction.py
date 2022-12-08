@@ -57,15 +57,13 @@ while True:
     cv2.circle(frame, (cx, cy), 20, (0, 0, 255), 4)
     cv2.circle(frame, (predicted[0], predicted[1]), 20, (255, 0, 0), 4)
     cv2.circle(frame, (predicted1[0], predicted1[1]), 20, (0, 255, 0), 4)
-    # out.write(frame)
     cv2.imshow("Frame", frame)
-    # txtOnDisplay = "predicted pos: {} - {}"
-    
+    # out.write(frame)
+    #region CONSOLE POS BASMA
+    # txtOnDisplay = "predicted pos: {} - {}"    
     # print(txtOnDisplay.format(cy, predicted[1]))
-    
-    
-    
-    
+    #endregion    
+        
     key = cv2.waitKey(150)
     if key == 27:
         break
