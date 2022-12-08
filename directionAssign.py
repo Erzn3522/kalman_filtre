@@ -15,4 +15,4 @@ class DirectionAssign:
        directX = "right" if difX > 0 else "left"
        dirextY = "up"   if dify > 0 else "down"
        
-       return [directX, dirextY]
+       return [difX, dify]
